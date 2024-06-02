@@ -6,7 +6,7 @@ class Product{
         $this->conn = new Database();
     }
 
-    public function get_products(){ 
+    public function get_products(){ //retorna los productos de la base de datos
         $newCon = $this->conn->db_conection();
         $query = $newCon->prepare("SELECT * FROM articulos");
         if($query === false){
@@ -20,7 +20,7 @@ class Product{
         return $result;
     }
 
-    public function get_product($id){ 
+    public function get_product($id){ //retorna un producto de la base de datos en base al identificador
         $newCon = $this->conn->db_conection();
         $query = $newCon->prepare("SELECT * FROM articulos WHERE id = ?");
         if($query === false){

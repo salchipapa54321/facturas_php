@@ -6,7 +6,7 @@ class Invoice{
         $this->conn = new Database();
     }
     
-    public function set_invoice($state,$discount,$idClient){ 
+    public function set_invoice($state,$discount,$idClient){ //almacenar en base de datos factura
         $newCon = $this->conn->db_conection();
         $query = $newCon->prepare("INSERT INTO facturas (estado,descuento,idCliente) VALUES (?,?,?)");
         if($query === false){ die("Error al intentar consultar: ". $newCon->error); }
@@ -18,7 +18,7 @@ class Invoice{
         return $idGenerado;
     }
 
-    public function set_detailsInvoice($amount,$price,$idproduct,$idInvoice){ 
+    public function set_detailsInvoice($amount,$price,$idproduct,$idInvoice){ //almacenar en base de datos los detalles de la factura
         $newCon = $this->conn->db_conection();
         $query = $newCon->prepare("INSERT INTO detalleFacturas(cantidad,precioUnitario,idArticulo,referenciaFactura) VALUES (?,?,?,?)");
         if($query === false){ die("Error al intentar consultar: ". $newCon->error); }
@@ -29,7 +29,7 @@ class Invoice{
         unset($quer,$amount,$price,$idproduct,$idInvoice);
     }
 
-    public function get_invoices(){ 
+    public function get_invoices(){ //retorna las facturas de la base de datos
         $newCon = $this->conn->db_conection();
         $query = $newCon->prepare("
         SELECT c.nombreCompleto,c.tipoDocumento,c.numeroDocumento,c.email,c.telefono,f.referencia,f.fecha,f.estado,f.descuento,df.cantidad,df.precioUnitario FROM facturas f INNER JOIN  clientes c ON c.id = f.idCliente INNER JOIN detalleFacturas df ON df.referenciaFactura = f.referencia");
@@ -45,7 +45,7 @@ class Invoice{
         return $result;
     }
 
-    public function get_invoice($id){ 
+    public function get_invoice($id){ //retorna una factura en base al identificador
         $newCon = $this->conn->db_conection();
         $query = $newCon->prepare("SELECT c.nombreCompleto,c.tipoDocumento,c.numeroDocumento,c.email,c.telefono,f.referencia,f.fecha,f.estado,f.descuento,df.cantidad,df.precioUnitario, a.nombre, a.precio FROM facturas f INNER JOIN  clientes c ON c.id = f.idCliente INNER JOIN detalleFacturas df ON df.referenciaFactura = f.referencia
         INNER JOIN articulos a ON a.id = df.idArticulo WHERE referencia = ?");
@@ -60,3 +60,7 @@ class Invoice{
         return $result;
     }
 }
+
+
+
+    

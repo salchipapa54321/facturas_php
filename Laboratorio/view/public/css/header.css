@@ -1,0 +1,34 @@
+.home {
+    width: 100%;
+}
+
+.home__header {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    background-color: #1F1F1F;
+}
+
+.home__header__img {
+    margin-left: -80%;
+    width: 5%;
+}
+
+.home__header__div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 1%;
+    width: 50%;
+}
+
+.home__header__div__div__a {
+    color: #FFFF;
+    text-decoration: none;
+}
+
+.home__header__div__div__a:hover {
+    color: #000000;
+    transition: 0.3s ease-in-out;
+}

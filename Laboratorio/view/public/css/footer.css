@@ -1,0 +1,9 @@
+.home__footer {
+    color: #FFFF;
+    background-color: #1F1F1F;
+    text-align: center;
+    padding: 1% 0 1% 0;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+}
